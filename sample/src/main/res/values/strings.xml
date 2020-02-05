@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">User.com sample</string>
+    <string name="login_button_text">Login</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="email">democustomer@demo.com</string>
+    <string name="name">John</string>
+    <string name="lastName">Dao</string>
+    <string name="customerId">myseconduser</string>
+
+    <string name="simpleFragment_content">Lorem ipsum fragment\n%s</string>
+
+    <string name="user_com_in_app_message_close_button">Aargh!</string>
+
+    <string name="login_first_name">First name</string>
+    <string name="login_last_name">Last name</string>
+    <string name="login_email">Email</string>
+    <string name="login_id">ID from your database</string>
+    <string name="login_btn">Login</string>
+
+    <string name="item_notification_message_caption">Message:</string>
+    <string name="item_notification_raw_data_caption">Raw data:</string>
+</resources>

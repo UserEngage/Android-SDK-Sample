@@ -1,0 +1,19 @@
+ext {
+
+    def JunitVersion = '4.12'
+    def MockitoCoreVersion = '1.10.19'
+    def JodaTimeVersion = '2.9.3'
+    def OkHttp3Version = '3.8.0'
+
+    unitTestDependencies = [
+            junit      : "junit:junit:${JunitVersion}",
+            mockitoCore: "org.mockito:mockito-core:${MockitoCoreVersion}",
+            jodaTime   : "joda-time:joda-time:${JodaTimeVersion}",
+    ]
+
+    mockWebServer = [
+            okHttpMock: "com.squareup.okhttp3:mockwebserver:${OkHttp3Version}"
+    ]
+
+}
+

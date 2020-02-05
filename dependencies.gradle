@@ -1,0 +1,54 @@
+ext {
+
+    def SupportLibrary = '28.0.0'
+    def FirebaseCore = '16.0.9'
+    def FirebaseMessaging = '18.0.0'
+
+    def RxJava2Version = '2.2.9'
+    def RxAndroid2Version = '2.1.1'
+    def Retrofit2Version = '2.6.0'
+    def OkHttp3Version = '3.14.2'
+    def GsonVersion = '2.8.5'
+
+    def EspressoVersion = "3.0.2"
+    def InstrumentationRunnerVersion = "1.0.2"
+
+    supportDependencies = [
+            design      : "com.android.support:design:${SupportLibrary}",
+            recyclerView: "com.android.support:recyclerview-v7:${SupportLibrary}",
+            cardView    : "com.android.support:cardview-v7:${SupportLibrary}",
+            appCompat   : "com.android.support:appcompat-v7:${SupportLibrary}",
+            support     : "com.android.support:support-v4:${SupportLibrary}",
+            annotations : "com.android.support:support-annotations:${SupportLibrary}",
+            customTabs  : "com.android.support:customtabs:${SupportLibrary}"
+    ]
+
+    fcmDependencies = [
+            core     : "com.google.firebase:firebase-core:${FirebaseCore}",
+            messaging: "com.google.firebase:firebase-messaging:${FirebaseMessaging}",
+    ]
+
+    rxJava2Dependencies = [
+            rxJava   : "io.reactivex.rxjava2:rxjava:${RxJava2Version}",
+            rxAndroid: "io.reactivex.rxjava2:rxandroid:${RxAndroid2Version}"
+    ]
+
+    retrofit2Dependencies = [
+            retrofit             : "com.squareup.retrofit2:retrofit:${Retrofit2Version}",
+            retrofitRxJavaAdapter: "com.squareup.retrofit2:adapter-rxjava2:${Retrofit2Version}",
+            okhttp               : "com.squareup.okhttp3:okhttp:${OkHttp3Version}",
+            okHttpLogging        : "com.squareup.okhttp3:logging-interceptor:${OkHttp3Version}",
+            gsonConverter        : "com.squareup.retrofit2:converter-gson:${Retrofit2Version}"
+    ]
+
+    gsonDependencies = [
+            gson: "com.google.code.gson:gson:${GsonVersion}"
+    ]
+
+    testDependencies = [
+            espresso: "com.android.support.test.espresso:espresso-core:$EspressoVersion",
+            runner  : "com.android.support.test:runner:$InstrumentationRunnerVersion"
+    ]
+
+}
+
