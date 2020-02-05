@@ -12,9 +12,9 @@ In **top level build.gradle** file add:
 ```groovy
 allprojects {
     repositories {
-        jcenter()
-        flatDir {
-            dirs 'libs'
+        …
+        maven {
+            url 'https://android-sdk.user.com'
         }
     }
 }
@@ -22,7 +22,9 @@ allprojects {
 
 Then in **app module build.gradle**:
 ```groovy
-compile(name:'usercom-sdk', ext: 'aar')
+dependencies {
+    implementation 'com.user:android-sdk:1.0.4'
+}
 ```
 
 ## Configure SDK in your app:
