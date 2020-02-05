@@ -1,12 +1,9 @@
-# DEPRECATED documentation - no longer actively maintained
 This doc has been preserved to give you some details but some of them
 may be out of date so be sure to check specific behavior in code. 
 
 # README
 
-## Add UserCom SDK to your app:
-
-Copy usercom-sdk.aar into your libs directory in app module.
+## Add User.com SDK to your app:
 
 In **top level build.gradle** file add:
 ```groovy
