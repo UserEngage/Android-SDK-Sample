@@ -28,47 +28,70 @@ dependencies {
 ```
 
 ## Configure SDK in your app:
+
+In your Application root file initialize UserCom.Builder with your SDK API key, context and base URL. It will initialize UserCom instance.
+
+If you want to track you client’s mobile view screens activities you also can append .trackAllActivities(true) like on the sample code below:
+
 ```java
 public class App extends Application {
+
+    public static final String TAG = App.class.getSimpleName();
 
     @Override
     public void onCreate() {
         super.onCreate();
-        new UserCom.Builder()
-                .context(this) //application context
-                .apiKey("api_secret") //your api secret key generated in panel [url]
-                .baseUrl("http://localhost:8080/") //use only if you have self hosted UE engine
+        new UserCom.Builder(
+                this,
+                "api_secret", //your api secret key generated in User.com webpanel details
+                "https://<your_app_subdomain>.user.com"
+        )
+                .trackAllActivities(true)  // false by default
+                .openLinksInChromeCustomTabs(true) // true by default
+                .setCustomTabsBuilder(getCustomTabsBuilder())
                 .build();
+    }
+
+    private static CustomTabsIntent.Builder getCustomTabsBuilder() {
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(Color.GREEN);
+        return builder;
     }
 }
 ```
 ## Register your user
-Somewhere in your LoginActivity:
+User will be registered anonymously right after SDK initialization. To set specific user attributes, pass them using `UserCom.getInstance().register()` function. Usually, we are registering the client's information in `LoginActivitiy` when a client passes data in forms.
+
+You should copy registerUserComCustomer() method e.g. for example to `LoginActivity`(if you want to get client's attribute in this activity) and then call it in method in which you want to retrieve client's information.
+
 ```java
-private void registerUserComCustomer() {
-    Customer customer = new Customer()
-            .id("idfromyourdatabase") // id of your user
-            .attr("email", "myemail@example.com")
-            .attr("name", "John Doe")
-            .attr("loyalCustomer", true)
-            .attr("age", 33)
-            .withDeviceInfo(this);
+class LoginActivity{
+    private void registerUserComCustomer() {
 
-    UserCom.getInstance()
-            .register(customer, new UserCom.RegisterCallback() {
-                @Override
-                public void onSuccess(RegisterResponse response) {
-                    Log.d(TAG, "onSuccess: " + response);
-                    // user is registered and now you can send events via SDK
-                }
+        Customer customer = new Customer()
+                .id("idfromyourdatabase") // id of your user
+                .firstName("John")
+                .lastName("Doe")
+                .email("myemail@example.com")
+                .attr("loyalCustomer", true)
+                .attr("age", 33)
 
-                @Override
-                public void onFailure(Throwable throwable) {
-                    Log.e(TAG, "onFailure: ", throwable);
-                    // try again - something went wrong
-                }
-            });
-}    
+        UserCom.getInstance()
+                .register(customer, new CustomerUpdateCallback() {
+                    @Override
+                    public void onSuccess(RegisterResponse response) {
+                        Log.d(TAG, "onSuccess: " + response);
+                        // user is registered and now you can send events via SDK
+                    }
+
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        Log.e(TAG, "onFailure: ", throwable);
+                        // try again - something went wrong
+                    }
+                });
+    }
+}
 ```
 
 ## Sending events
