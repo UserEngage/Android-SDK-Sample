@@ -66,10 +66,8 @@ public class LoginActivity extends Activity {
 
     private void registerUserComCustomer() {
 
-        String myId = UUID.randomUUID().toString();
-
         Customer customer = new Customer()
-                .id(myId) // id of your user
+                .id(nullOrEmpty(idInput.getText().toString()) ? UUID.randomUUID().toString() : idInput.getText().toString()) // id of your user
                 .firstName(nullOrEmpty(firstNameInput.getText().toString()) ? "" : firstNameInput.getText().toString())
                 .lastName(nullOrEmpty(lastNameInput.getText().toString()) ? "" : lastNameInput.getText().toString())
                 .email(nullOrEmpty(mailInput.getText().toString()) ? "" : mailInput.getText().toString())
@@ -80,6 +78,13 @@ public class LoginActivity extends Activity {
         UserCom.getInstance().register(customer, new CustomerUpdateCallback() {
             @Override
             public void onSuccess(RegisterResponse response) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class)
+                        .putExtra("key1", "value1")
+                        .putExtra(MainActivity.INTENT_KEY1, 137)
+                        .putExtra("key3", true);
+
+                startActivity(intent);
+                finish();
             }
 
             @Override
@@ -87,22 +92,6 @@ public class LoginActivity extends Activity {
                 Log.e(TAG, "onFailure: ", throwable);
             }
         });
-
-        Log.d(TAG, "registerUserComCustomer: " + customer.toFlat());
-
-        UserCom.getInstance().register(customer, new CustomerUpdateCallback() {
-            @Override
-            public void onSuccess(RegisterResponse response) {
-            }
-
-            @Override
-            public void onFailure(Throwable throwable) {
-                Log.e(TAG, "onFailure: ", throwable);
-            }
-        });
-        
-        Toast.makeText(this, "Successfully sent 2 pings", Toast.LENGTH_SHORT).show();
-
     }
 
     private static boolean nullOrEmpty(String s) {
