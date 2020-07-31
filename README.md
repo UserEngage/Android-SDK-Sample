@@ -42,7 +42,7 @@ public class App extends Application {
                 this,
                 "mobile_sdk_key", //your mobile sdk key generated in User.com webpanel details
                 "integrations_api_key", // your api secret key from User.com webpanel under Settings -> Setup & Integration
-                "https://<your_app_subdomain>.user.com"
+                "https://<your_app_subdomain>.user.com/"
         )
                 .trackAllActivities(true)  // false by default
                 .openLinksInChromeCustomTabs(true) // true by default
