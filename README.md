@@ -20,7 +20,7 @@ allprojects {
 Then in **app module build.gradle**:
 ```groovy
 dependencies {
-    implementation 'com.user:android-sdk:1.0.4'
+    implementation 'com.user:android-sdk:1.2.1'
 }
 ```
 
@@ -40,7 +40,8 @@ public class App extends Application {
         super.onCreate();
         new UserCom.Builder(
                 this,
-                "api_secret", //your api secret key generated in User.com webpanel details
+                "mobile_sdk_key", //your mobile sdk key generated in User.com webpanel details
+                "integrations_api_key", // your api secret key from User.com webpanel under Settings -> Setup & Integration
                 "https://<your_app_subdomain>.user.com"
         )
                 .trackAllActivities(true)  // false by default
@@ -135,6 +136,32 @@ UserCom.getInstance().sendEvent(myCustomEvent);
 ```
 UserComSDK will automatically add your user identifier and date time informations. In UserCom web panel your event will appearr as MyCustomEvent (classname)
 
+#### Product events:
+Start by defining your custom product event - a class that implements `UserComProductEvent` interface and is annotated with `@ProductEvent` annotation.
+```java
+import com.user.sdk.events.ProductEvent;
+import com.user.sdk.events.ProductEventType;
+import com.user.sdk.events.UserComProductEvent;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@ProductEvent(productId = "1234", eventType = ProductEventType.REFUND)
+public class MyCustomProductEvent implements UserComProductEvent {
+    @Override
+    public Map<String, Object> toFlat() {
+        Map<String, Object> eventBody = new HashMap<>();
+        eventBody.put("product_name", "My Product");
+        eventBody.put("product_price", 200);
+        return eventBody;
+    }
+}
+```
+Then sending that event to User.com is as simple as:
+```java
+UserCom.getInstance().sendProductEvent(new MyCustomProductEvent());
+```
+Note that events are sent right away. If you do not have internet connection they will be queued and sent whenever internet connection is available.
 ## Handling notifications
 
 ### If you will integrate FCM into the app for the first time follow the Firebase instructions:
