@@ -4,10 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.user.sdk.UserCom;
 import com.user.sdk.events.ScreenName;
 import com.user.sdk.events.TrackArguments;
+import com.user.sdk.preloadContent.PreloadContent;
+import com.user.sdk.preloadContent.PreloadContentCallback;
 
 
 /**
@@ -29,6 +33,41 @@ public class MainActivity extends Activity {
         findViewById(R.id.btn_fcm).setOnClickListener(__ -> startActivity(new Intent(this, FcmTestActivity.class)));
         findViewById(R.id.btn_fragment).setOnClickListener(__ -> startActivity(new Intent(this, SimpleFragmentActivity.class)));
         findViewById(R.id.btn_signout).setOnClickListener(__ -> logout());
+
+        findViewById(R.id.btn_preload_content_show).setOnClickListener(__ -> {
+            UserCom.getInstance().showPreloadContent("example_content", new PreloadContentCallback() {
+                @Override
+                public void onSuccess(PreloadContent content) {
+                    Toast.makeText(MainActivity.this, content.getContent(), Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Throwable throwable) {
+                    Toast.makeText(MainActivity.this, "Failed to get the content", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, throwable.getLocalizedMessage());
+                }
+            });
+        });
+
+        findViewById(R.id.btn_preload_content_fetch).setOnClickListener(__ -> {
+            UserCom.getInstance().fetchPreloadContent("example_content", new PreloadContentCallback() {
+                @Override
+                public void onSuccess(PreloadContent content) {
+                    Toast.makeText(MainActivity.this, content.getContent(), Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Throwable throwable) {
+                    Toast.makeText(MainActivity.this, "Failed to get the content", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, throwable.getLocalizedMessage());
+                }
+            });
+        });
+
+        findViewById(R.id.btn_send_product_event).setOnClickListener(__ -> {
+            UserCom.getInstance().sendProductEvent(new MyCustomProductEvent());
+        });
+
         super.onCreate(savedInstanceState);
     }
 

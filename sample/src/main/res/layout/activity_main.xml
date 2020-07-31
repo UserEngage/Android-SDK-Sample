@@ -20,6 +20,30 @@
         android:text="Fragment" />
 
     <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_preload_content_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textAllCaps="false"
+        android:text="SHOW example_content" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_preload_content_fetch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textAllCaps="false"
+        android:text="FETCH example_content" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_send_product_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textAllCaps="false"
+        android:text="Send custom product event" />
+
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_signout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
