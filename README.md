@@ -162,6 +162,45 @@ Then sending that event to User.com is as simple as:
 UserCom.getInstance().sendProductEvent(new MyCustomProductEvent());
 ```
 Note that events are sent right away. If you do not have internet connection they will be queued and sent whenever internet connection is available.
+
+## Predefined Content
+There are two methods allowing you to:
+- show content
+- fetch content
+
+To create a preload content item, please visit https://<your_app>.user.com/preload-contents/
+
+#### Show Preload Content
+You can show your content with `showPreloadContent` method. It handles specified content including data from the cache. If there is no data stored in a cache, the content will be fetched from the server.
+``` java
+UserCom.getInstance().showPreloadContent("example_content", new PreloadContentCallback() {
+        @Override
+        public void onSuccess(PreloadContent content) {
+            // Do whatever you want
+        }
+
+        @Override
+        public void onFailure(Throwable throwable) {
+            // Something went wrong, maybe you should try again?
+        }
+    });
+```
+The onSuccess method will return the data (preload content).
+#### Fetch Preload Content
+If you want to pass over data inside the cache, you can fetch the content directly using fetchPreloadContent method. A specified data will be fetched from the server, saved inside the cache, and returned in onSuccess method.
+``` java
+UserCom.getInstance().fetchPreloadContent("example_content", new PreloadContentCallback() {
+        @Override
+        public void onSuccess(PreloadContent content) {
+            // Do whatever you want
+        }
+
+        @Override
+        public void onFailure(Throwable throwable) {
+            // Something went wrong, maybea you should try again?
+        }
+    });
+```
 ## Handling notifications
 
 ### If you will integrate FCM into the app for the first time follow the Firebase instructions:
