@@ -13,8 +13,9 @@ public class App extends Application {
         super.onCreate();
         new UserCom.Builder(
                 this,
-                "4WYWkbBIszDKZf39bAAwgLfwVUYblWuIQ3gXWAYCibNhChZiXoWRZfNEmE91LaNQ", // your api secret key generated in panel
-                "https://demo1.user.com" // User.com API url
+                "mobile_sdk_key", //your mobile sdk key generated in User.com webpanel details
+                "integrations_api_key", // your api secret key from User.com webpanel under Settings -> Setup & Integration
+                "https://<your_app_subdomain>.user.com/"
         )
                 .trackAllActivities(true)
                 .openLinksInChromeCustomTabs(true)
