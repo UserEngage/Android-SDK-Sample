@@ -134,10 +134,10 @@ When you invoke
 ```java
 UserCom.getInstance().sendEvent(myCustomEvent);
 ```
-UserComSDK will automatically add your user identifier and date time informations. In UserCom web panel your event will appearr as MyCustomEvent (classname)
+UserComSDK will automatically add your user identifier and date time information. In UserCom web panel your event will appear as MyCustomEvent (classname)
 
 #### Product events:
-Sending that event to User.com is as simple as:
+Sending such event to User.com is as simple as:
 ```java
 UserCom.getInstance().sendProductEvent("MY_PRODUCT_ID", ProductEventType.ADD_TO_CART, myParams);
 ```
