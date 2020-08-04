@@ -134,33 +134,15 @@ When you invoke
 ```java
 UserCom.getInstance().sendEvent(myCustomEvent);
 ```
-UserComSDK will automatically add your user identifier and date time informations. In UserCom web panel your event will appearr as MyCustomEvent (classname)
+UserComSDK will automatically add your user identifier and date time information. In UserCom web panel your event will appear as MyCustomEvent (classname)
 
 #### Product events:
-Start by defining your custom product event - a class that implements `UserComProductEvent` interface and is annotated with `@ProductEvent` annotation.
+Sending such event to User.com is as simple as:
 ```java
-import com.user.sdk.events.ProductEvent;
-import com.user.sdk.events.ProductEventType;
-import com.user.sdk.events.UserComProductEvent;
-
-import java.util.HashMap;
-import java.util.Map;
-
-@ProductEvent(productId = "1234", eventType = ProductEventType.REFUND)
-public class MyCustomProductEvent implements UserComProductEvent {
-    @Override
-    public Map<String, Object> toFlat() {
-        Map<String, Object> eventBody = new HashMap<>();
-        eventBody.put("product_name", "My Product");
-        eventBody.put("product_price", 200);
-        return eventBody;
-    }
-}
+UserCom.getInstance().sendProductEvent("MY_PRODUCT_ID", ProductEventType.ADD_TO_CART, myParams);
 ```
-Then sending that event to User.com is as simple as:
-```java
-UserCom.getInstance().sendProductEvent(new MyCustomProductEvent());
-```
+Where `myParams` is just a key value map containing your custom parameters you would like to send.
+
 Note that events are sent right away. If you do not have internet connection they will be queued and sent whenever internet connection is available.
 
 ## Predefined Content
