@@ -8,10 +8,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.user.sdk.UserCom;
+import com.user.sdk.events.ProductEventType;
 import com.user.sdk.events.ScreenName;
 import com.user.sdk.events.TrackArguments;
 import com.user.sdk.preloadContent.PreloadContent;
 import com.user.sdk.preloadContent.PreloadContentCallback;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -65,7 +69,10 @@ public class MainActivity extends Activity {
         });
 
         findViewById(R.id.btn_send_product_event).setOnClickListener(__ -> {
-            UserCom.getInstance().sendProductEvent(new MyCustomProductEvent());
+            Map<String, Object> eventBody = new HashMap<>();
+            eventBody.put("product_rating", 0);
+            eventBody.put("custom_data", "some data");
+            UserCom.getInstance().sendProductEvent("MY_PRODUCT_ID", ProductEventType.ADD_TO_CART, eventBody);
         });
 
         super.onCreate(savedInstanceState);
